@@ -1,0 +1,22 @@
+// Consulta: Total de categories
+db.biblioteca.countDocuments({
+  categories: { $exists: true, $ne: [] }
+})
+// Resultado: 271
+
+// Consulta: total de autores
+db.biblioteca.aggregate([
+  { $unwind: "$authors" },
+  { $group: { _id: "$authors" } },
+  { $count: "totalAtores" }
+])
+// Resultado:579
+
+// Consulta: total de autores distintos com livros com mais de 120 páginas
+db.biblioteca.aggregate([
+  { $match: { pageCount: { $gt: 120 } } },
+  { $unwind: "$authors" },
+  { $group: { _id: "$authors" } },
+  { $count: "totalAtoresMais2h" }
+])
+// Resultado: { totalAtoresMais2h: 377 }
