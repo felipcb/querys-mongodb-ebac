@@ -19,4 +19,4 @@ db.biblioteca.aggregate([
   { $group: { _id: "$authors" } },
   { $count: "totalAtoresMais2h" }
 ])
-// Resultado: { totalAtoresMais2h: 377 }
+// Resultado: 377 
